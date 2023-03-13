@@ -8,7 +8,7 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
         self.avarage_score = 0
-        Student.counter.append(self)
+        # Student.counter.append(self)
 
     def add_courses(self, course_name):
         self.finished_courses.append(course_name)
@@ -67,12 +67,15 @@ class Student:
             print('the operand on the right must have the type Student')
         return self.avarage_score >= other.avarage_score
 
-    def avarage_grade_for_the_course(course):
+    def avarage_grade_for_the_course(self, course):
         scores = []
-        for i in Student.counter:
-            for key, value in i.grades.items():
-                if course == key:
-                    scores.extend(value)
+        for i in self:
+            if not isinstance(i, Student):
+                print('all objects must be in the class Student')
+            else:
+                for key, value in i.grades.items():
+                    if course == key:
+                        scores.extend(value)
         scores = sum(scores) / len(scores)
         print(f'Средний балл у студенгов за курс {course} - {scores}')
 
@@ -135,16 +138,18 @@ class Lecturer(Mentor):
             print('the operand on the right must have the type Lecturer')
         return self.avarage_score >= other.avarage_score
 
-    def avarage_grade_for_the_course(course):
+    def avarage_grade_for_the_course(self, course):
         scores = []
-        for i in Lecturer.counter:
-            for key, value in i.grades.items():
-                if course == key:
-                    scores.extend(value)
+        for i in self:
+            if not isinstance(i, Lecturer):
+                print('all objects must be in the class Lecturer')
+            else:
+                for key, value in i.grades.items():
+                    if course == key:
+                        scores.extend(value)
         scores = sum(scores) / len(scores)
         print(f'Средний балл у лекторов за курс {course} - {scores}')
 
-        
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -182,7 +187,7 @@ lecturer2.courses_attached.append('Python')
 lecturer2.courses_attached.append('Git')
 
 student1.mentor_rate(lecturer1, 'Python', 9) # оценки лектораам
-student1.mentor_rate(lecturer1, 'Git', 7)
+student1.mentor_rate(lecturer1, 'Git', 8)
 student2.mentor_rate(lecturer2, 'Python', 8)
 student2.mentor_rate(lecturer2, 'Git', 10)
 
@@ -202,10 +207,12 @@ lecturer2.avarage()
 
 print()
 print('средний балл за курс____________________________')
-Student.avarage_grade_for_the_course('Git') # подсчет средней оценки за ДЗ по всем студентам/лекторам в рамках конкретного курса
-Student.avarage_grade_for_the_course('Python')
-Lecturer.avarage_grade_for_the_course('Python')
-Lecturer.avarage_grade_for_the_course('Git')
+stud_list = [student1, student2]
+lecturer_list = [lecturer1, lecturer2]
+Student.avarage_grade_for_the_course(stud_list, 'Git') # подсчет средней оценки за ДЗ по всем студентам/лекторам в рамках конкретного курса
+Student.avarage_grade_for_the_course(stud_list, 'Python')
+Lecturer.avarage_grade_for_the_course(lecturer_list, 'Python')
+Lecturer.avarage_grade_for_the_course(lecturer_list, 'Git')
 
 print() # Перегрузка __str__ у всех классов
 print('перегрузка __str__ ____________')
@@ -216,5 +223,12 @@ print(some_reviewer)
 print()
 print('сравнение средних баллов у студентов/лекторов----------------')
 
+print(student2.__ne__(student1))
+print(student1.__eq__(student2))
+print(student1.__gt__(student2))
+print(student1.__le__(student2))
+print(student1.__lt__(student2))
+print(student1.__ge__(student2))
+print(student1 == student2)
 
 
