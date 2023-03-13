@@ -36,14 +36,36 @@ class Student:
 курсы в процессе изучения: {self.courses_in_progress} 
 Завершенные курсы: {self.finished_courses}'''
         return new_print
-    
-    def comparison(self, another_student):
-        result = ''
-        if self.avarage_score > another_student.avarage_score:
-            result = f'У студента {self.surname} средний балл выше'
-        elif self.avarage_score < another_student.avarage_score:
-            result = f'У студента {another_student.surname} средний балл выше'
-        print(result)
+
+    def __eq__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score == other.avarage_score
+
+    def __gt__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score > other.avarage_score
+
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score < other.avarage_score
+
+    def __ne__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score != other.avarage_score
+
+    def __le__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score <= other.avarage_score
+
+    def __ge__(self, other):
+        if not isinstance(other, Student):
+            print('the operand on the right must have the type Student')
+        return self.avarage_score >= other.avarage_score
 
     def avarage_grade_for_the_course(course):
         scores = []
@@ -82,14 +104,36 @@ class Lecturer(Mentor):
 Фамилия: {self.surname} 
 Средняя оценка за лекции: {self.avarage_score}'''
                 return new_print 
-    
-    def comparison(self, another_lecturer):
-        result = ''
-        if self.avarage_score > another_lecturer.avarage_score:
-            result = f'У лектора {self.surname} средний балл выше'
-        elif self.avarage_score < another_lecturer.avarage_score:
-            result = f'У лектора {another_lecturer.surname} средний балл выше'
-        print(result)
+
+    def __eq__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score == other.avarage_score
+
+    def __gt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score > other.avarage_score
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score < other.avarage_score
+
+    def __ne__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score != other.avarage_score
+
+    def __le__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score <= other.avarage_score
+
+    def __ge__(self, other):
+        if not isinstance(other, Lecturer):
+            print('the operand on the right must have the type Lecturer')
+        return self.avarage_score >= other.avarage_score
 
     def avarage_grade_for_the_course(course):
         scores = []
@@ -171,6 +215,6 @@ print(some_reviewer)
 
 print()
 print('сравнение средних баллов у студентов/лекторов----------------')
-student1.comparison(student2)
-lecturer1.comparison(lecturer2)
+
+
 
